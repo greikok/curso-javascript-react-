@@ -2,37 +2,57 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Destructuring</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Destructuring</title>
 </head>
 
 <body>
-    <main class="profile">
-        <div class="wrapper">
-            <div class="profile-content" id="user">
+  <main class="profile">
+    <div class="wrapper">
+      <button class="button" id="update" >Cuantos años tiene Ash</button>
+      <div class="profile-content" id="user">
+      </div>
+    </div>
+  </main>
+  <script>
+    const user = {
+      name: 'Ash',
+      lastName: 'Ketchum',
+      avatar: './images/ash.jpg',
+      bio: 'Tengo 10 años y mi sueño es convertime en maestro pokemon. Actualmente viajo con Pikachu y Go.',
+      city: 'Pueblo Paleta',
+      social: [150, 160, 130, 255]
+    }
 
-            </div>
-        </div>
-    </main>
-    <script>
-        const user = {
-            name: 'Ash',
-            lastName: 'Ketchum',
-            avatar: './images/ash.jpg',
-            bio: 'Tengo 10 años y mi sueño es convertime en maestro pokemon. Actualmente viajo con Pikachu y Go.',
-            city: 'Pueblo Paleta',
-            social: [150, 160, 130, 255]
-        }
+    function useState(initialState) {
+      let value = initialState
+      function state() {
+        return value
+      }
 
-        function User({ name, lastName, avatar, city, bio, social }) {
-            const [twitter, facebook, instagram, tiktok] = social
-            return `
+      function setState(newValue) {
+        value = newValue
+      }
+
+      return [
+        state,
+        setState,
+      ]
+    }
+
+    function User({ name, lastName, avatar, city, bio: bio_, social }) {
+      const [twitter, facebook, instagram, tiktok] = social
+      const [age, setAge] = useState(10)
+     
+      function render() {
+        const bio =  bio_.replace('10', age)
+        return `
         <div class="user">
           <img src="${avatar}" alt="${name}" width="140" height="140">
           <div class="details">
-            <p>${name} ${lastName}</p>
+            <p>${name} ${lastName} ${age()}</p>
           </div>
           <p class="city"><em>${city}</em></p>
           <div class="social">
@@ -54,10 +74,21 @@
           </div>
         </div>
       `
-        }
+      }
+      return {
+        render,
+        setAge
+      }
+    }
 
-        window.user.innerHTML = User(user)
-    </script>
+    const ash = User(user)
+    window.update.addEventListener('click',()=> {
+      const newAge = window.prompt('¿Que edad tendra Ash?', 10)
+      ash.setAge(newAge)
+      window.user.innerHTML = ash.render()
+    })
+    window.user.innerHTML = ash.render()
+  </script>
 </body>
 
 </html>
