@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  font-family: system-ui, Helvetica, sans-serif;
+  background-color: white;
+  text-align: center;
+  min-height: 100vh;
+  background: repeating-linear-gradient(-225deg, #d0d6f6, #d0d6f6 20px, white 20px, white 40px,#fdd1d0 40px, #fdd1d0 60px, white 60px, white 80px);
+}
+.wrapper {
+  max-width: 1020px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 110px;
+  line-height: 100px;
+}
+
+.hero-content {
+  display: flex;
+}
+.app {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2em;
+  text-align: left;
+}
+p {
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+}
+
+.button {
+  color: white;
+  background: #3f69ff;
+  border: none;
+  font-size: 2em;
+  padding: .7em 2em;
+  border-radius: .5em;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+.icrecream-grid {
+  display: grid;
+  grid-template-columns: auto-fit;
+  grid-auto-flow: column;
+  margin-bottom: 1em;
+}
+
+.icrecream-grid .flavor {
+  height: 80px;
+}
+.flavor {
+  transition: .3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  box-sizing: border-box;
+}
+.flavor.is-active {
+  border: 5px dashed greenyellow;
+}
+.flavor:hover {
+  z-index: 1;
+  transform: scale(1.2);
+}
+.flavor:before {
+  content: attr(data-flavor);
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 black;
+}
+
+.strawberry {
+  background: red;
+}
+
+.chocolate {
+  background: brown;
+}
+
+.vanilla {
+  background: #f3e5ab;
+}
+
+.orange {
+  background: orange;
+}
+
+.lemon {
+  background: lime;
+}
+
